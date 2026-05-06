@@ -310,7 +310,7 @@ const App = () => {
 
       <div className={`transition-all duration-500 ease-in-out shadow-2xl relative flex flex-col overflow-hidden ${
         isMobileMode 
-          ? (isRealMobile ? 'w-full h-screen bg-[var(--bg-app)]' : (isLandscape ? 'w-[844px] h-[410px] rounded-[40px] border-[8px] border-[#2D2F36] bg-[var(--bg-app)]' : 'mobile-frame')) 
+          ? (isRealMobile ? 'w-full h-[100dvh] bg-[var(--bg-app)]' : (isLandscape ? 'w-[844px] h-[410px] rounded-[40px] border-[8px] border-[#2D2F36] bg-[var(--bg-app)]' : 'mobile-frame')) 
           : 'w-full h-screen bg-[var(--bg-app)]'
       }`}>
         {isMobileMode && !isLandscape && !isRealMobile && <div className="status-bar-notch"></div>}
