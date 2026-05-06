@@ -226,6 +226,7 @@ const App = () => {
 
   const [isMobileMode, setIsMobileMode] = useState(true);
   const [isLandscape, setIsLandscape] = useState(false);
+  const [isRealMobile, setIsRealMobile] = useState(false);
   const [theme, setTheme] = useState('dark'); // dark, light, system
   const [darkness, setDarkness] = useState(0); // 0 to 100
   const [userFontColor, setUserFontColor] = useState(''); // Empty means use theme default
@@ -237,6 +238,16 @@ const App = () => {
     setTheme(savedTheme);
     setDarkness(savedDarkness);
     setUserFontColor(savedFontColor);
+
+    // Real Mobile Detection
+    const checkRealMobile = () => {
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+      setIsRealMobile(isMobile);
+      if (isMobile) setIsMobileMode(true);
+    };
+    checkRealMobile();
+    window.addEventListener('resize', checkRealMobile);
+    return () => window.removeEventListener('resize', checkRealMobile);
   }, []);
 
   useEffect(() => {
@@ -266,8 +277,9 @@ const App = () => {
 
   return (
     <div className={`device-wrapper min-h-screen bg-black flex flex-col items-center justify-center transition-all duration-500 ${!isMobileMode ? 'p-0 pt-0' : ''}`}>
-      {/* Device Toggle Bar - Master Sync */}
-      <div className="fixed top-4 right-6 flex items-center gap-2 z-[100]">
+      {/* Device Toggle Bar - Master Sync - Hidden on Real Mobile */}
+      {!isRealMobile && (
+        <div className="fixed top-4 right-6 flex items-center gap-2 z-[100]">
         <div className="flex bg-[#1F2229] p-1 rounded-xl border border-gray-800 shadow-xl">
           <button 
             onClick={() => setIsMobileMode(false)}
@@ -294,13 +306,14 @@ const App = () => {
           <svg className={`w-4 h-4 transition-transform duration-500 ${isLandscape ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" strokeLinecap="round" strokeLinejoin="round"></path></svg>
         </button>
       </div>
+      )}
 
       <div className={`transition-all duration-500 ease-in-out shadow-2xl relative flex flex-col overflow-hidden ${
         isMobileMode 
-          ? (isLandscape ? 'w-[844px] h-[410px] rounded-[40px] border-[8px] border-[#2D2F36] bg-[var(--bg-app)]' : 'mobile-frame') 
+          ? (isRealMobile ? 'w-full h-screen bg-[var(--bg-app)]' : (isLandscape ? 'w-[844px] h-[410px] rounded-[40px] border-[8px] border-[#2D2F36] bg-[var(--bg-app)]' : 'mobile-frame')) 
           : 'w-full h-screen bg-[var(--bg-app)]'
       }`}>
-        {isMobileMode && !isLandscape && <div className="status-bar-notch"></div>}
+        {isMobileMode && !isLandscape && !isRealMobile && <div className="status-bar-notch"></div>}
         
         {/* Darkness Overlay - Simulates Brightness Reduction */}
         <div 
