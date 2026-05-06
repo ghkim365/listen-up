@@ -1,9 +1,9 @@
 {
-  "name": "listen_up",
+  "name": "listen-up",
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "homepage": "https://GITHUB_USERNAME.github.io/listen_up",
+  "homepage": "https://ghkim365.github.io/listen-up",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",

@@ -24,6 +24,7 @@ manual/
 work/
 workflow/
 history/
+stitch/
 
 # 📂 Sensitive Data (LOCAL ONLY)
 app_config.json

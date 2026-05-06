@@ -6,7 +6,7 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/listen_up/',
+  base: './',
   plugins: [
     react(),
     {
