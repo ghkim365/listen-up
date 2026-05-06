@@ -1,0 +1,45 @@
+# Dependency directories
+node_modules/
+dist/
+build/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment and Backups
+.env
+.env.local
+backups/
+
+# 🧹 Internal Project Files (NEVER EXPOSE)
+# These are moved to the parent folder but listed here for safety
+manual/
+work/
+workflow/
+history/
+
+# 📂 Sensitive Data (LOCAL ONLY)
+app_config.json
+예제.md
+output.txt
+json/
+*.json.bak
+*.md.bak
+
+# 🚀 Execution & Temp files
+*.bat
+*.url
+*.vbs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.eslintcache
+
